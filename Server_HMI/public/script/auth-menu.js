@@ -30,9 +30,9 @@ function auth_page(hak, emenu) {
   if (dLogin.supervise) {
     strMenu += `<li>
         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Supervisory</span> <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-            <li><a class="nav-link" href="sup.html">Single Node</a></li>
-            <li><a class="nav-link" href="sup-group.html">Multi Nodes</a></li>
+        <ul class="dropdown-menu ml-3">
+            <li><a class="nav-link ml-3" href="sup.html">Single Node</a></li>
+            <li><a class="nav-link ml-3" href="sup-group.html">Multi Nodes</a></li>
       </ul>`
   }
   if (dLogin.configure) {
