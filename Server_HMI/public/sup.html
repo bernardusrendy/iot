@@ -65,17 +65,19 @@
         <div class="col-sm-11">
           <div id="controlContainer" class="container">
             <div class="row align-items-center">
-              <div class="col-sm-10">
+              <div class="col-sm-7">
                 <div style="color: black; font-family: Roboto; font-size: 18px;">CC Threshold</div>
-                <input type="range" min="0" max="1000" value="50" class="sliderRGB CC" id="sliderCC"/>
+                <input type="range" min="0" max="1000" value="50" class="sliderCC CC" id="sliderCC"/>
                 <span id="sliderValCC" style="color: black; font-family: Roboto; font-size: 18px;"></span> <!--Show the value of the slider-->
                 <span style="color: black; font-family: Roboto; font-size: 18px;"> Lux </span>
               </div>
-              <div class="col-sm-2">
+              <div class="col-sm-5">
+                <button id="buttonPublish" class="button-three">Publish</button>
+                <button id="buttonPublish" class="button-three">Reset</button>
                 <label class="toggle mt-3 mb-3">
-                      <input id="checkboxAuto" class= "toggle-checkbox" type="checkbox">
-                      <div class="toggle-switch"></div>
-                      <span class="toggle-label">Auto</span>
+                    <input id="checkboxAuto" class= "toggle-checkbox" type="checkbox">
+                    <div class="toggle-switch"></div>
+                    <span class="toggle-label">Auto</span>
                 </label>
               </div>
             </div>
