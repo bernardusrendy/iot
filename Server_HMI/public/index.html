@@ -1,0 +1,68 @@
+<html>
+ <head>
+    <title>TF4016 - Industrial Internet of Things</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="script/jquery-3.4.1.min.js"></script>
+    <script src="script/bootstrap.min.js"></script>
+    <script src="script/helper.js"></script>
+
+    <script>
+        function initLogin() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            login(username,password); //run login from helper
+        }
+    </script>
+</head>
+ <body>
+    <ul class="header">
+        <li><img src="img/Logo_ITB.png" id="logo_itb"/></li>
+        <li>TF4061 - Industrial Internet of Things</li>
+    </ul>
+    <p class="container_title">SENSOR</p>
+    <div class="sensors_container">
+        <div id="humidity" class="sensors">
+            <p class="sensors_title">TT991</p>
+            <div class="sensors_value">
+                <p class="sensors_number" id="TF-IIOT/NODE99/TT/991">000</p>
+                <p style="display:inline"> C</p>
+            </div>
+        </div>
+        <div id="temperature" class="sensors">
+            <p class="sensors_title">TT981</p>
+            <div class="sensors_value">
+                <p class="sensors_number" id="TF-IIOT/NODE98/TT/981">000</p>
+                <p style="display:inline"> C</p>
+            </div>
+        </div>
+        <div id="brightness" class="sensors">
+            <p class="sensors_title">TT971</p>
+            <div class="sensors_value">
+                <p class="sensors_number" id="TF-IIOT/NODE97/TT/971">000</p>
+                <p style="display:inline"> C</p>
+            </div>
+        </div>
+
+        <div class="login" style="margin: 2em">
+
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="username" class="form-control" id="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password">
+            </div>
+
+            <button onclick="initLogin()" class="btn btn-primary">Go</button>
+
+        </div>
+
+    </div>
+ </body>
+</html>
