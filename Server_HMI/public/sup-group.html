@@ -9,7 +9,7 @@
     <script src="script/jquery-3.4.1.min.js"></script>
     <script src="script/bootstrap.min.js"></script>
     <script src="script/mqtt.js"></script>
-
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
  </head>
  <body>
 
@@ -23,8 +23,93 @@
     <script src="script/auth-menu.js"></script>
     <script>auth_page('supervise','menu')</script>
     
-    <div id="e-heatmap"></div>
-
+    <div class="container mt-3 mb-2">
+        <div id="controlContainer" class="container mt-3 p-5">
+            <div class="row align-items-center">
+                <div class="col-sm-6">
+                    <h1 style="color:black;"> SENSOR BRIGHTNESS </h1>
+                    <div id="e-heatmap" class="ml-5"></div>                
+                </div>
+                <div class="col-sm-6">
+                    <h1 style="color:black;"> STATUS LED </h1>
+                    <div id="e-heatmap2" class="ml-5"></div>                
+                </div>        
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div id="controlContainer" class="container mt-3">
+            <div class="row align-items-center">
+                <div class="radio ml-3"> 
+                    <input id="semua" type="radio" name="numbers" value="semua">  
+                    <label for="semua">Semua</label>  
+                    <input id="kirix" type="radio" name="numbers" value="kirix">  
+                    <label for="kirix">Kiri(X-Axis)</label>
+                    <input id="tengahx" type="radio" name="numbers" value="tengahx">  
+                    <label for="tengahx">Tengah(X-Axis)</label>
+                    <input id="kananx" type="radio" name="numbers" value="kananx">  
+                    <label for="kananx">Kanan(X-Axis)</label>
+                    <input id="kiriy" type="radio" name="numbers" value="kiriy">  
+                    <label for="kiriy">Kiri(Y-Axis)</label>
+                    <input id="tengahy" type="radio" name="numbers" value="tengahy">  
+                    <label for="tengahy">Tengah(Y-Axis)</label>
+                    <input id="kanany" type="radio" name="numbers" value="kanany">  
+                    <label for="kanany">Kanan(Y-Ais)</label>              
+                </div>            
+            </div>
+            <div class="row align-items-center">
+                <div class="col-sm-7">
+                    <div style="color: black; font-family: Roboto; font-size: 18px;">CC Threshold</div>
+                    <input type="range" min="0" max="1000" value="50" class="sliderCC CC" id="sliderCC"/>
+                    <span id="sliderValCC" style="color: black; font-family: Roboto; font-size: 18px;"></span> <!--Show the value of the slider-->
+                    <span style="color: black; font-family: Roboto; font-size: 18px;"> Lux </span>
+                </div>
+                <div class="col-sm-3">
+                    <button id="buttonPublish" class="button-three">Publish</button>
+                    <button id="buttonReset" class="button-three">Reset</button>
+                    <div>
+                        <label class="toggle mt-3 mb-3 ml-2">
+                          <input id="checkboxAuto" class= "toggle-checkbox" type="checkbox">
+                          <div class="toggle-switch"></div>
+                          <span class="toggle-label">Auto</span>
+                        </label>
+                        <label class="toggle mt-3 mb-3 ml-4">
+                          <input id="checkboxOn" class= "toggle-checkbox" type="checkbox">
+                          <div class="toggle-switch"></div>
+                          <span class="toggle-label">On</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <button id="buttonOmbak" class="button-three">Ombak Warna</button>
+                    <button id="buttonSpiral" class="button-three">Spiral</button>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-sm-8">
+                  <div>
+                      <div style="color: black; font-family: Roboto; font-size: 18px;">Red</div>
+                      <input type="range" min="0" max="255" value="50" class="sliderRGB R" id="sliderR"/>
+                      <span id="sliderValR" style="color: black; font-family: Roboto; font-size: 18px;"></span> <!--Show the value of the slider--> 
+                  </div>   
+                  <div>
+                    <div style="color: black; font-family: Roboto; font-size: 18px;">Green</div>
+                    <input type="range" min="0" max="255" value="50" class="sliderRGB G" id="sliderG"/>
+                    <span id="sliderValG" style="color: black; font-family: Roboto; font-size: 18px;"></span> <!--Show the value of the slider-->
+                  </div>
+                  <div>
+                    <div style="color: black; font-family: Roboto; font-size: 18px;">Blue</div>
+                    <input type="range" min="0" max="255" value="50" class="sliderRGB B" id="sliderB"/>
+                    <span id="sliderValB" style="color: black; font-family: Roboto; font-size: 18px;"></span> <!--Show the value of the slider-->
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <!-- LOADING OUTPUT, Untuk mengubah dari loading jadi finished tinggal mengubah class "loader loader7" menjadi "finished" -->
+                  <div class="finished"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="footer">(c) Teknik Fisika ITB, 2019</div>
 
     <script type="text/javascript" src="script/heatmap.min.js"></script>

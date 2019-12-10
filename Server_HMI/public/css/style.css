@@ -3,7 +3,7 @@
 /* LAYOUT UTAMA */
 body {
     background-color: #2c3e50;
-    font-family: sans-serif;
+    font-family: Roboto;
     margin: 0;
 }
 
@@ -104,7 +104,7 @@ body {
     color: Black;
     display: table-cell;
     vertical-align: middle;
-    font-family: 'Helvetica';
+    font-family: 'Roboto';
     font-size: 15pt;
     width: 150px;
     padding: 10px 0;
@@ -115,7 +115,7 @@ body {
 .sensors_value {
     font-size: 20pt;
     display: table-cell;
-    font-family: 'Helvetica','Arial',sans-serif;
+    font-family: 'Roboto';
     display: inline-block;
     /* margin-top: 5px; */
     text-align: center;
@@ -137,6 +137,12 @@ body {
 }
 
 #e-heatmap {
+    width: 400px;
+    height: 400px;
+    background-color: steelblue;
+}
+
+#e-heatmap2 {
     width: 400px;
     height: 400px;
     background-color: steelblue;
@@ -365,6 +371,7 @@ body {
 *{margin: 0px; padding: 0px}
 
 h1, button{
+  font-family: Roboto;
   color:#fff;
   text-align: center;
 }
@@ -415,4 +422,41 @@ h1, button{
     margin: 0;
     opacity: 1;
     transition: 0s
+}
+
+input[type="radio"] + label {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  padding-left: 30px;
+  margin-right: 15px;
+  font-size: 13px;
+}
+input[type="radio"] + label:before {
+  content: "";
+  display: block;
+  width: 22px;
+  height: 22px;
+  margin-right: 14px;
+  position: absolute;
+  top: -2px;
+  left: 1px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  border-radius: 50%;
+}
+input[type="radio"] {
+  display: none !important;
+  *display: inline;
+}
+input[type="radio"]:checked + label:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 3px;
+  left: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #b7b7b7;
 }

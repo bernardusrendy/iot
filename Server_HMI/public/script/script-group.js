@@ -132,3 +132,51 @@ function viewUpdateHeatmap() {
 }
 
 viewHeatmap();
+
+/// SLIDER R
+var sliderR = document.getElementById("sliderR");
+var sliderValR = document.getElementById("sliderValR");
+sliderValR.innerHTML = sliderR.value; // Display the default slider value
+
+// Update the current slider value (each time you drag the slider handle)
+sliderR.oninput = function() {
+  sliderValR.innerHTML = this.value;
+  R = this.value;
+  console.log(this.value);
+};
+
+/// SLIDER G
+var sliderG = document.getElementById("sliderG");
+var sliderValG = document.getElementById("sliderValG");
+sliderValR.innerHTML = sliderR.value; // Display the default slider value
+
+// Update the current slider value (each time you drag the slider handle)
+sliderG.oninput = function() {
+  sliderValG.innerHTML = this.value;
+  G = this.value;
+  console.log(this.value);
+};
+
+/// SLIDER B
+var sliderB = document.getElementById("sliderB");
+var sliderValB = document.getElementById("sliderValB");
+sliderValB.innerHTML = sliderB.value; // Display the default slider value
+
+// Update the current slider value (each time you drag the slider handle)
+sliderB.oninput = function() {
+  sliderValB.innerHTML = this.value;
+  B = this.value;
+  console.log(this.value);
+};
+
+/// SLIDER CC
+var sliderCC = document.getElementById("sliderCC");
+var sliderValCC = document.getElementById("sliderValCC");
+sliderValCC.innerHTML = sliderCC.value; // Display the default slider value
+
+// Update the current slider value (each time you drag the slider handle)
+sliderCC.oninput = function() {
+  sliderValCC.innerHTML = this.value;
+  CC = this.value;
+  console.log(this.value);
+};

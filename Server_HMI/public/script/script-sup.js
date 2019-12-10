@@ -282,7 +282,7 @@ sliderB.oninput = function() {
   console.log(this.value);
 };
 
-/// SLIDER B
+/// SLIDER CC
 var sliderCC = document.getElementById("sliderCC");
 var sliderValCC = document.getElementById("sliderValCC");
 sliderValCC.innerHTML = sliderCC.value; // Display the default slider value
