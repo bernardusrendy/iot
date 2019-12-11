@@ -85,14 +85,8 @@ function publish() {
   } else {
     stateAuto = 0;
   }
-  if (document.getElementById("checkboxOn").checked == true) {
-    stateOn = 1;
-  } else {
-    stateOn = 0;
-  }
 
   console.log("State Auto", stateAuto);
-  console.log("State On", stateOn);
 
   var z = 1;
   for(let i = 1; i<5; i++){

@@ -31,10 +31,6 @@
                 </div>
                 <div class="col-sm-6">
                     <h1 style="color:black;"> STATUS LED </h1>
-
-                    <div id="e-heatmap2" class="ml-md-5"></div>
-                </div>
-
                     <div id="e-heatmap2" class="ml-md-5 p-4">
                         <div class="row p-3">
                             <div class="col-sm-3">
@@ -110,31 +106,12 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
     <div class="container">
         <div id="controlContainer" class="container mt-3">
             <div class="row align-items-center">
-
-                <div class="radio ml-3">
-                    <input id="semua" type="radio" name="numbers" value="semua">
-                    <label for="semua">Semua</label>
-                    <input id="kirix" type="radio" name="numbers" value="kirix">
-                    <label for="kirix">Kiri(X-Axis)</label>
-                    <input id="tengahx" type="radio" name="numbers" value="tengahx">
-                    <label for="tengahx">Tengah(X-Axis)</label>
-                    <input id="kananx" type="radio" name="numbers" value="kananx">
-                    <label for="kananx">Kanan(X-Axis)</label>
-                    <input id="kiriy" type="radio" name="numbers" value="kiriy">
-                    <label for="kiriy">Kiri(Y-Axis)</label>
-                    <input id="tengahy" type="radio" name="numbers" value="tengahy">
-                    <label for="tengahy">Tengah(Y-Axis)</label>
-                    <input id="kanany" type="radio" name="numbers" value="kanany">
-                    <label for="kanany">Kanan(Y-Ais)</label>
-                </div>
-
                 <div class="col-sm-12">
                     <h1 style="color:black; align-content: center;"> CONTROL RGB dan CC </h1>
                     <div class="radio">
@@ -161,24 +138,24 @@
                     <button id="buttonReset" class="button-three">Reset</button>
                     <button id="buttonOmbak" class="button-three">Ombak Warna</button>
                     <button id="buttonSpiral" class="button-three">Spiral</button>
+                    <label class="toggle mt-3 mb-3 ml-2">
+                      <span class="toggle-label">Manual</span>
+                      <input id="checkboxAuto" class= "toggle-checkbox" type="checkbox">
+                      <div class="toggle-switch"></div>
+                      <span class="toggle-label">Auto</span>
+                    </label>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-sm-12">
                     <div style="color: black; font-family: Roboto; font-size: 18px;">CC Threshold</div>
                     <input type="range" min="0" max="1000" value="50" class="sliderCC CC" id="sliderCC"/>
                     <span id="sliderValCC" style="color: black; font-family: Roboto; font-size: 18px;"></span> <!--Show the value of the slider-->
                     <span style="color: black; font-family: Roboto; font-size: 18px;"> Lux </span>
                 </div>
-                <div class="col-sm-4">
-                    <div>
-                        <label class="toggle mt-3 mb-3 ml-2">
-                          <span class="toggle-label">Manual</span>
-                          <input id="checkboxAuto" class= "toggle-checkbox" type="checkbox">
-                          <div class="toggle-switch"></div>
-                          <span class="toggle-label">Auto</span>
-                        </label>
-                    </div>
-                </div>
             </div>
             <div class="row align-items-center">
-                <div class="col-sm-8">
+                <div class="col-sm-12">
                   <div>
                       <div style="color: black; font-family: Roboto; font-size: 18px;">Red</div>
                       <input type="range" min="0" max="255" value="50" class="sliderRGB R" id="sliderR"/>
@@ -194,10 +171,6 @@
                     <input type="range" min="0" max="255" value="50" class="sliderRGB B" id="sliderB"/>
                     <span id="sliderValB" style="color: black; font-family: Roboto; font-size: 18px;"></span> <!--Show the value of the slider-->
                   </div>
-                </div>
-                <div class="col-sm-4">
-                  <!-- LOADING OUTPUT, Untuk mengubah dari loading jadi finished tinggal mengubah class "loader loader7" menjadi "finished" -->
-                  <div class="finished"></div>
                 </div>
             </div>
         </div>

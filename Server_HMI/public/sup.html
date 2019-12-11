@@ -31,7 +31,7 @@
             </div>
             <div id="controlContainer" class="container mt-3">
               <div class="row align-items-center">
-                <div class="col-sm-8">
+                <div class="col-sm-9">
                   <div>
                       <div style="color: black; font-family: Roboto; font-size: 18px;">Red</div>
                       <input type="range" min="0" max="255" value="50" class="sliderRGB R" id="sliderR"/>
@@ -48,9 +48,9 @@
                     <span id="sliderValB" style="color: black; font-family: Roboto; font-size: 18px;"></span> <!--Show the value of the slider-->
                   </div>
                 </div>
-                <div class="col-sm-4">
-                  <!-- LOADING OUTPUT, Untuk mengubah dari loading jadi finished tinggal mengubah class "loader loader7" menjadi "finished" -->
-                  <div class="finished"></div>
+                <div class="col-sm-3">
+                  <!-- Indicator Manual/Auto tergantung YI, set class ke "loader loader7" untuk auto dan "manual" untuk manual -->
+                  <div class="manual"></div>
                 </div>
               </div>
             </div>
@@ -64,13 +64,13 @@
         <div class="col-sm-11">
           <div id="controlContainer" class="container mb-3">
             <div class="row align-items-center">
-              <div class="col-sm-7">
+              <div class="col-sm-8">
                 <div style="color: black; font-family: Roboto; font-size: 18px;">CC Threshold</div>
                 <input type="range" min="0" max="1000" value="50" class="sliderCC CC" id="sliderCC"/>
                 <span id="sliderValCC" style="color: black; font-family: Roboto; font-size: 18px;"></span> <!--Show the value of the slider-->
                 <span style="color: black; font-family: Roboto; font-size: 18px;"> Lux </span>
               </div>
-              <div class="col-sm-5">
+              <div class="col-sm-4">
                 <button id="buttonPublish" class="button-three">Publish</button>
                 <button id="buttonReset" class="button-three">Reset</button>
                 <div>
@@ -80,12 +80,6 @@
                       <div class="toggle-switch"></div>
                       <span class="toggle-label">Auto</span>
                   </label>
-                  <label class="toggle mt-3 mb-3 ml-4">
-                      <span class="toggle-label">Off</span>
-                      <input id="checkboxOn" class= "toggle-checkbox" type="checkbox">
-                      <div class="toggle-switch"></div>
-                      <span class="toggle-label">On</span>
-                  </label>
                 </div>
               </div>
             </div>
@@ -94,7 +88,7 @@
       </div>
     </div>
 
-    <div id="footer">
+    <div id="footer" class="pl-2">
       (c) Teknik Fisika ITB, 2019
     </div>
 
