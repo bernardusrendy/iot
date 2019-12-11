@@ -2,7 +2,7 @@
 */
 
 //---- Configuratior
-const BROKER_ADDR = '192.168.43.215'
+const BROKER_ADDR = 'localhost'
 const SYS_TOPIC = 'TF-IIOT/'
 const NODE_NAME = 'NODE';
 const NODE_NUMS = [

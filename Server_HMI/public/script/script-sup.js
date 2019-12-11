@@ -293,3 +293,62 @@ sliderCC.oninput = function() {
   CC = this.value;
   console.log(this.value);
 };
+
+var RGB = ["R", "G", "B"];
+
+function reset() {
+  // SLIDER RGB
+  for (let i = 0; i < 3; i++) {
+    document.getElementById("slider" + RGB[i]).value = 50;
+    document.getElementById("sliderVal" + RGB[i]).innerHTML = 50; // Ambil Value
+    // sliderVal[i].innerHTML = slider[i].value; // Display the default slider value
+    // console.log(slider[i].value)
+  }
+  // // SLIDER CC
+  document.getElementById("sliderCC").value = 50;
+  document.getElementById("sliderValCC").innerHTML = 50; // Ambil Value
+  // sliderVal[3].innerHTML = slider[3].value; // Display the default slider value
+  // console.log(slider[3].value)
+
+  // state Auto
+  document.getElementById("checkboxAuto").checked = false;
+}
+
+function publish() {
+  var autoManual;
+  if (document.getElementById("checkboxAuto").checked == true) {
+    autoManual = 1;
+  } else {
+    autoManual = 0;
+  }
+  client.publish(
+    SYS_TOPIC + "NODE01/CC/011",
+    document.getElementById("sliderCC").value.toString(),
+    { retain: true }
+  );
+  client.publish(SYS_TOPIC + "NODE01/YS/011", autoManual.toString(), {
+    retain: true
+  });
+  client.publish(
+    SYS_TOPIC + "NODE01/DVR/011",
+    document.getElementById("sliderR").value.toString(),
+    { retain: true }
+  );
+  client.publish(
+    SYS_TOPIC + "NODE01/DVG/011",
+    (document.getElementById("sliderG"), value).toString(),
+    { retain: true }
+  );
+  client.publish(
+    SYS_TOPIC + "NODE01/DVB/011",
+    document.getElementById("sliderB").value.toString(),
+    { retain: true }
+  );
+
+  // For monitoring
+  // console.log(document.getElementById("sliderCC").value.toString());
+  // console.log(autoManual.toString())
+  // console.log(document.getElementById("sliderR").value.toString())
+  // console.log(document.getElementById("sliderG").value.toString())
+  // console.log(document.getElementById("sliderB").value.toString())
+}
