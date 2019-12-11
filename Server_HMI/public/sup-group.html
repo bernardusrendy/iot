@@ -31,14 +31,93 @@
                 </div>
                 <div class="col-sm-6">
                     <h1 style="color:black;"> STATUS LED </h1>
+<<<<<<< HEAD
                     <div id="e-heatmap2" class="ml-md-5"></div>
                 </div>
+=======
+                    <div id="e-heatmap2" class="ml-md-5 p-4">
+                        <div class="row p-3">
+                            <div class="col-sm-3">
+                                <span id="map_x1y1" class="indicators pt-4 p-1">
+                                </span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span id="map_x1y2" class="indicators pt-4 p-1">
+                                </span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span id="map_x1y3" class="indicators pt-4 p-1">
+                                </span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span id="map_x1y4" class="indicators pt-4 p-1">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row p-3">
+                            <div class="col-sm-3">
+                                <span id="map_x2y1" class="indicators pt-4 p-1">
+                                </span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span id="map_x2y2" class="indicators pt-4 p-1">
+                                </span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span id="map_x2y3" class="indicators pt-4 p-1">
+                                </span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span id="map_x2y4" class="indicators pt-4 p-1">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row p-3">
+                            <div class="col-sm-3">
+                                <span id="map_x3y1" class="indicators pt-4 p-1">
+                                </span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span id="map_x3y2" class="indicators pt-4 p-1">
+                                </span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span id="map_x3y3" class="indicators pt-4 p-1">
+                                </span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span id="map_x3y4" class="indicators pt-4 p-1">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row p-3">
+                            <div class="col-sm-3">
+                                <span id="map_x4y1" class="indicators pt-4 p-1">
+                                </span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span id="map_x4y2" class="indicators pt-4 p-1">
+                                </span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span id="map_x4y3" class="indicators pt-4 p-1">
+                                </span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span id="map_x4y4" class="indicators pt-4 p-1">
+                                </span>
+                            </div>
+                        </div>
+                    </div>                
+                </div>        
+>>>>>>> 8345573479bd927081c2c04b71e5217ef6c9b1a9
             </div>
         </div>
     </div>
     <div class="container">
         <div id="controlContainer" class="container mt-3">
             <div class="row align-items-center">
+<<<<<<< HEAD
                 <div class="radio ml-3">
                     <input id="semua" type="radio" name="numbers" value="semua">
                     <label for="semua">Semua</label>
@@ -55,33 +134,54 @@
                     <input id="kanany" type="radio" name="numbers" value="kanany">
                     <label for="kanany">Kanan(Y-Ais)</label>
                 </div>
+=======
+                <div class="col-sm-12">
+                    <h1 style="color:black; align-content: center;"> CONTROL RGB dan CC </h1>
+                    <div class="radio"> 
+                        <input id="semua" type="radio" name="numbers" value="semua" onClick=radioClick()>  
+                        <label for="semua">Semua</label>  
+                        <input id="kirix" type="radio" name="numbers" value="kirix" onClick=radioClick()>  
+                        <label for="kirix">Kiri(X-Axis)</label>
+                        <input id="tengahx" type="radio" name="numbers" value="tengahx" onClick=radioClick()>  
+                        <label for="tengahx">Tengah(X-Axis)</label>
+                        <input id="kananx" type="radio" name="numbers" value="kananx" onClick=radioClick()>  
+                        <label for="kananx">Kanan(X-Axis)</label>
+                        <input id="kiriy" type="radio" name="numbers" value="kiriy" onClick=radioClick()>  
+                        <label for="kiriy">Kiri(Y-Axis)</label>
+                        <input id="tengahy" type="radio" name="numbers" value="tengahy" onClick=radioClick()>  
+                        <label for="tengahy">Tengah(Y-Axis)</label>
+                        <input id="kanany" type="radio" name="numbers" value="kanany" onClick=radioClick()>  
+                        <label for="kanany">Kanan(Y-Ais)</label>              
+                    </div>
+                </div>            
+>>>>>>> 8345573479bd927081c2c04b71e5217ef6c9b1a9
             </div>
             <div class="row align-items-center">
                 <div class="col-sm-7">
+                    <button id="buttonPublish" class="button-three">Publish</button>
+                    <button id="buttonReset" class="button-three">Reset</button>
+                    <button id="buttonOmbak" class="button-three">Ombak Warna</button>
+                    <button id="buttonSpiral" class="button-three">Spiral</button>
                     <div style="color: black; font-family: Roboto; font-size: 18px;">CC Threshold</div>
                     <input type="range" min="0" max="1000" value="50" class="sliderCC CC" id="sliderCC"/>
                     <span id="sliderValCC" style="color: black; font-family: Roboto; font-size: 18px;"></span> <!--Show the value of the slider-->
                     <span style="color: black; font-family: Roboto; font-size: 18px;"> Lux </span>
                 </div>
-                <div class="col-sm-3">
-                    <button id="buttonPublish" class="button-three">Publish</button>
-                    <button id="buttonReset" class="button-three">Reset</button>
+                <div class="col-sm-4">
                     <div>
                         <label class="toggle mt-3 mb-3 ml-2">
+                          <span class="toggle-label">Manual</span>
                           <input id="checkboxAuto" class= "toggle-checkbox" type="checkbox">
                           <div class="toggle-switch"></div>
                           <span class="toggle-label">Auto</span>
                         </label>
                         <label class="toggle mt-3 mb-3 ml-4">
+                          <span class="toggle-label">Off</span>
                           <input id="checkboxOn" class= "toggle-checkbox" type="checkbox">
                           <div class="toggle-switch"></div>
                           <span class="toggle-label">On</span>
                         </label>
                     </div>
-                </div>
-                <div class="col-sm-2">
-                    <button id="buttonOmbak" class="button-three">Ombak Warna</button>
-                    <button id="buttonSpiral" class="button-three">Spiral</button>
                 </div>
             </div>
             <div class="row align-items-center">
@@ -109,7 +209,104 @@
             </div>
         </div>
     </div>
-    <div id="footer">(c) Teknik Fisika ITB, 2019</div>
+    <div class="container mt-3 mb-2">
+        <div id="controlContainer" class="container mt-3">
+            <h1 style="color:black;">CONTROL SELECTION</h1>
+            <div class="row mt-3 align-items-center">
+                <div class="col-sm-3 ml-md-3"></div>
+                <div class="ml-md-5 col-sm-4 align-self-center">
+                    <div class="ml-md-5 align-items-center"><!-- 16 Checkbox -->
+                        <div class="row align-items-center">
+                            <div class="col-sm-2 bordered" style="font-size: 30px;padding-left: 0px; padding-right: 0px; text-align: center;">
+                                X/Y
+                            </div>
+                            <div class="col-sm-2 bordered" style="font-size: 30px;padding-left: 0px; padding-right: 0px; text-align: center;">
+                                 1 
+                            </div>
+                            <div class="col-sm-2 bordered" style="font-size: 30px;padding-left: 0px; padding-right: 0px; text-align: center;">
+                                 2 
+                            </div>
+                            <div class="col-sm-2 bordered" style="font-size: 30px;padding-left: 0px; padding-right: 0px; text-align: center;">
+                                 3 
+                            </div>
+                            <div class="col-sm-2 bordered" style="font-size: 30px;padding-left: 0px; padding-right: 0px; text-align: center;">
+                                 4 
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-sm-2 bordered" style="font-size: 30px;padding-left: 0px; padding-right: 0px; text-align: center;">
+                                1
+                            </div>
+                            <div class="col-sm-2 bordered" style="padding-left: 0px; padding-right: 0px;">
+                                <input type="checkbox" class="ml-sm-5 ml-md-1 customCheck" id="x1y1">
+                            </div>
+                            <div class="col-sm-2 bordered" style="padding-left: 0px; padding-right: 0px;">
+                                <input type="checkbox" class="ml-sm-5 ml-md-1 customCheck" id="x1y2">
+                            </div>
+                            <div class="col-sm-2 bordered" style="padding-left: 0px; padding-right: 0px;">
+                                <input type="checkbox" class="ml-sm-5 ml-md-1 customCheck" id="x1y3">
+                            </div>
+                            <div class="col-sm-2 bordered" style="padding-left: 0px; padding-right: 0px;">
+                                <input type="checkbox" class="ml-sm-5 ml-md-1 customCheck" id="x1y4">
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-sm-2 bordered" style="font-size: 30px;padding-left: 0px; padding-right: 0px; text-align: center;">
+                                2
+                            </div>
+                            <div class="col-sm-2 bordered" style="padding-left: 0px; padding-right: 0px;">
+                                <input type="checkbox" class="ml-sm-5 ml-md-1 customCheck" id="x2y1">
+                            </div>
+                            <div class="col-sm-2 bordered" style="padding-left: 0px; padding-right: 0px;">
+                                <input type="checkbox" class="ml-sm-5 ml-md-1 customCheck" id="x2y2">
+                            </div>
+                            <div class="col-sm-2 bordered" style="padding-left: 0px; padding-right: 0px;">
+                                <input type="checkbox" class="ml-sm-5 ml-md-1 customCheck" id="x2y3">
+                            </div>
+                            <div class="col-sm-2 bordered" style="padding-left: 0px; padding-right: 0px;">
+                                <input type="checkbox" class="ml-sm-5 ml-md-1 customCheck" id="x2y4">
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-sm-2 bordered" style="font-size: 30px;padding-left: 0px; padding-right: 0px; text-align: center;">
+                                3
+                            </div>
+                            <div class="col-sm-2 bordered" style="padding-left: 0px; padding-right: 0px;">
+                                <input type="checkbox" class="ml-sm-5 ml-md-1 customCheck" id="x3y1">
+                            </div>
+                            <div class="col-sm-2 bordered" style="padding-left: 0px; padding-right: 0px;">
+                                <input type="checkbox" class="ml-sm-5 ml-md-1 customCheck" id="x3y2">
+                            </div>
+                            <div class="col-sm-2 bordered" style="padding-left: 0px; padding-right: 0px;">
+                                <input type="checkbox" class="ml-sm-5 ml-md-1 customCheck" id="x3y3">
+                            </div>
+                            <div class="col-sm-2 bordered" style="padding-left: 0px; padding-right: 0px;">
+                                <input type="checkbox" class="ml-sm-5 ml-md-1 customCheck" id="x3y4">
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-sm-2 bordered" style="font-size: 30px;padding-left: 0px; padding-right: 0px; text-align: center;">
+                                4
+                            </div>
+                            <div class="col-sm-2 bordered" style="padding-left: 0px; padding-right: 0px;">
+                                <input type="checkbox" class="ml-sm-5 ml-md-1 customCheck" id="x4y1">
+                            </div>
+                            <div class="col-sm-2 bordered" style="padding-left: 0px; padding-right: 0px;">
+                                <input type="checkbox" class="ml-sm-5 ml-md-1 customCheck" id="x4y2">
+                            </div>
+                            <div class="col-sm-2 bordered" style="padding-left: 0px; padding-right: 0px;">
+                                <input type="checkbox" class="ml-sm-5 ml-md-1 customCheck" id="x4y3">
+                            </div>
+                            <div class="col-sm-2 bordered" style="padding-left: 0px; padding-right: 0px;">
+                                <input type="checkbox" class="ml-sm-5 ml-md-1 customCheck" id="x4y4">
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer" class="pl-2">(c) Teknik Fisika ITB, 2019</div>
 
     <script type="text/javascript" src="script/heatmap.min.js"></script>
     <script type="text/javascript" src="script/script-group.js"></script>
