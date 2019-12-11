@@ -1,182 +1,221 @@
-/*
-Tampilan banyak none memakai heatmap
-https://www.patrick-wied.at/static/heatmapjs/
-*/
-
-const BROKER_ADDR = '127.0.0.1';
-const BROKER_PORT = '3000';
-
-const SYS_TOPIC = 'TF-IIOT/';
-const TAG_TOPIC = 'CT';       // tag yang akan masuk chart
-
-// nama eleman HTML
-const E_HEATMAP = 'e-heatmap';
-
-// interval heatmap akan diupdate 
-const UPDATE_INTERVAL = 1000;
-const CT_MAX = 5000;
-const CT_MIN = 0;
-
-const HEATMAP_SCALE = 400/5;
-
-// hitung berapa data yang sudah diterima
-var received_count=0;
-var value_max=0;
-var value_min=1000;
-
-
-// heatmap 
-// create configuration object
-var config = {
-    container: document.getElementById(E_HEATMAP),
-  };
-
-// data-data heatmap
-var heatmap = h337.create(config);
-var heatmap_data = {
-    max: CT_MAX,
-    min: CT_MIN,
-    data: []
-}
-// KALAU DI SET DI SINI, KELUAR
-// KALAU DARI viewHeatmap(), tak mau
-//heatmap.setData(heatmap_data);
-
-// map untuk mempercepat akses ke heatmap_data
-var mapCT = new Map();
-
+/////***** CONFIGURATION & SETUP *****/////
+const BROKER_ADDR = "192.168.43.131";
+const BROKER_PORT = "3000";
+// Topic with wildcard
+const SYS_TOPIC = "TF-IIOT/";
 // MQTT Setup
-var broker_url = 'ws://'+BROKER_ADDR+":"+BROKER_PORT;
+var broker_url = "ws://" + BROKER_ADDR + ":" + BROKER_PORT;
 var client = mqtt.connect(broker_url);
 
+/////***** VARIABLE *****/////
+// Declaration
+var position = [[0,0],[0,0]]; // x, y
+var node = [0] // node yang true
+var slider = [];
+var sliderVal = [];
+var RGB = ["R", "G", "B"];
+var radio = [
+  "semua",
+  "kirix",
+  "tengahx",
+  "kananx",
+  "kiriy",
+  "tengahy",
+  "kanany"
+];
+// var radioState = ["semua", "kirix", "tengahx", "kananx", "kiriy", "tengahy", "kanany"]
+var nodestate = [];
+for (let i = 0; i < 16; i++) {
+  nodestate.push("0");
+}
+console.log(nodestate);
+// SLIDER RGB
+for (let i = 0; i < 3; i++) {
+  slider[i] = document.getElementById("slider" + RGB[i]);
+  sliderVal[i] = document.getElementById("sliderVal" + RGB[i]); // Ambil Value
+  sliderVal[i].innerHTML = slider[i].value; // Display the default slider value
+  // console.log(slider[i].value)
+
+  //Update the current slider value (each time you drag the slider handle)
+  slider[i].oninput = function() {
+    sliderVal[i].innerHTML = this.value;
+    console.log(slider[i].value);
+  };
+}
+// // SLIDER CC
+slider[3] = document.getElementById("sliderCC");
+sliderVal[3] = document.getElementById("sliderValCC"); // Ambil Value
+sliderVal[3].innerHTML = slider[3].value; // Display the default slider value
+
+//Update the current slider value (each time you drag the slider handle)
+slider[3].oninput = function() {
+  sliderVal[3].innerHTML = this.value;
+  // console.log(slider[3].value);
+};
+
+/////***** MQTT *****/////
 // Run when connected (continuous)
-client.on('connect', async function() {
-    console.log('MQTT client connected to '+broker_url);
+client.on("connect", function() {
+  console.log("client connected at %s:%s", BROKER_ADDR);
 
-        // siap terima semua data CT
-    topic = SYS_TOPIC+'+/'+TAG_TOPIC+'/#';
-    client.subscribe(topic);
-    console.log("Subscribe for "+topic);
-    timer = setInterval(viewUpdateHeatmap, UPDATE_INTERVAL);
-    
-})
+  // Subscribe pake wildcard
+  //   client.subscribe(SYS_TOPIC);
 
-// Run when message received
-client.on('message', function(topic, message) {   
-    // decode topic
-    // SYS/NODE/TAG/NUM
-    fields = topic.split("/");
-    node = fields[1];
-    value = parseInt(message.toString('utf-8'),10);
-    //console.log('Received %s = %d', node, value);
-    onReceiveCT(node, value);
-})
+  // for monitoring
+  //   console.log("MQTT RECEIVED", topic + " : " + message.toString());
 
-//----------------------------------------------------
-// Fungsi-fungsi REST
-async function getNodes() {
-  url = '/api/nodes';
-  //console.log('Get :', url);
-  response = await fetch(url);
-  rjson = await response.json();
-  //console.log(JSON.stringify(rjson));
-  return rjson;
-}
+  // decode the topic
+  //   var fields = topic.split("/");
+  // console.log('FIELDS', fields)
 
-// ------------------------------------------------------------
-// Fungsi-fungsi untuk update UI
+  //   sNode = fields[1]; // snode = NODE01 atau NODE02 dsb
+  //   sTag = fields[2] + fields[3]; // sTAG = CT011 dsb
+  //   value = parseInt(message, 10); // isi dari topicnya
+  // console.log("VALUE", value)
+  //   updateHMI(sNode, sTag);
+});
 
-// memasukkan data CT ke heatmap
-async function onReceiveCT(node, value) {
-    point = mapCT.get(node);
-    if (point != null) {
-        point.value = value;
-        received_count +=1;
-        //console.log("Update "+node+"="+JSON.stringify(point));
-    }
-}
+/////***** FUNCTION *****/////
+function publish() {
+  // console.log("Hi")
 
-// mengambil data posisi (X,Y) semua node
-// lalu menginisiasi tampilan heat map
-async function viewHeatmap() {
-  nodes = await getNodes();
-  if (nodes) {
-    // build heat map
-    heatmap_data.data = []; /// kosongkan dulu
-    for (node of nodes) {
-        var point = new Object();
-        point.x = node.PX * HEATMAP_SCALE;
-        point.y = node.PY * HEATMAP_SCALE;
-        point.value = node.PX*node.PY*300;
-        heatmap_data.data.push(point);
-        mapCT.set(node.NODE,point);
-    }
-    heatmap.setData(heatmap_data);
-    console.log('heatmap_data = '+JSON.stringify(heatmap_data));
-    return true;
+  // Check state value
+  if (document.getElementById("checkboxAuto").checked == true) {
+    stateAuto = 1;
+  } else {
+    stateAuto = 0;
   }
-  else {
-    shtml="Cannot get the nodes";
-    document.getElementById(E_HEATMAP).innerHTML = shtml;
-    return false;
+  if (document.getElementById("checkboxOn").checked == true) {
+    stateOn = 1;
+  } else {
+    stateOn = 0;
+  }
+
+  console.log("State Auto", stateAuto);
+  console.log("State On", stateOn);
+
+  var z = 1;
+  for(let i = 1; i<5; i++){
+    for(let u = 1; u<5; u++){
+      // Check checkbox state and save it in the array
+      node[z] = document.getElementById("x" + u.toString() + "y" + i.toString()).checked;
+      // position[i][u] = document.getElementById("x" + i.toString() + "y" + u.toString()).checked;
+      // node[z] = position[i][u]
+      z++
+    }
+  }
+
+  for (let i = 1; i < 17; i++) {
+    // Get true if node is checked for 1 node
+    // node[i] = document.getElementById("node" + i.toString()).checked;
+
+    // Publish when checkbox is ticked
+    if (node[i] == true) {
+      console.log("node", i, "PUBLISHED");
+
+      console.log("HERE", typeof i)
+      // Publish RGB topic
+      for (let u = 0; u < 3; u++) {
+        if (i<10){
+          topicPublish = SYS_TOPIC + "NODE" + "0" + i + "/DV" + RGB[u] + "/0"+ i +"1";
+        } else{
+          topicPublish = SYS_TOPIC + "NODE" + i + "/DV" + RGB[u] + "/"+ i + "1";
+        }
+        console.log(topicPublish, slider[u].value.toString());
+        client.publish(topicPublish, slider[u].value.toString());
+      }
+
+      // Publish CC topic
+      if (i<10){
+        topicPublish = SYS_TOPIC + "NODE" + "0" + i + "/CC" + "/0"+ i +"1";
+      } else{
+        topicPublish = SYS_TOPIC + "NODE" + i + "/CC" + "/"+ i + "1";
+      }
+
+      client.publish(topicPublish, slider[3].value.toString());
+      console.log(topicPublish, slider[3].value.toString());
+
+      // Publish State Auto
+      if (i<10){
+        topicPublish = SYS_TOPIC + "NODE" + "0" + i + "/YS" + "/0"+ i +"1";
+      } else{
+        topicPublish = SYS_TOPIC + "NODE" + i + "/YS" + "/"+ i + "1";
+      }
+
+      client.publish(topicPublish, stateAuto.toString());
+      console.log(topicPublish, stateAuto.toString());
+    }
+  }
+  console.log(node);
+}
+
+function updateHMI() {}
+
+// function changeColor(node) {
+//   console.log(
+//     document.getElementById("node" + node.toString()).style.backgroundColor
+//   );
+//   document.getElementById("node" + node.toString()).style.backgroundColor =
+//     "#be174f";
+// }
+
+function radioClick() {
+  for (let i = 0; i < 7; i++) {
+    if (document.getElementById(radio[i]).checked == true) {     
+      if ((i == 0)) {
+        check(0,1,1)
+        check(0,2,1)
+        check(0,3,1)
+        check(0,4,1)
+      } else if ((i == 1)) {
+        check(1,0,1);
+        check(2,0,0)
+        check(3,0,0)
+        check(4,0,0)
+      } else if ((i == 2)) {
+        check(2,0,1)
+        check(3,0,1)
+        check(1,0,0)
+        check(4,0,0)
+      } else if ((i == 3)) {
+        check(4,0,1)
+        check(1,2,0)
+        check(2,2,0)
+        check(3,0,0)
+      } else if ((i == 4)) {
+        check(0,1,1);
+        check(0,2,0)
+        check(0,3,0)
+        check(0,4,0)
+      } else if ((i == 5)) {
+        check(0,1,0);
+        check(0,2,1)
+        check(0,3,1)
+        check(0,4,0)
+      } else {
+        check(0,1,0);
+        check(0,2,0)
+        check(0,3,0)
+        check(0,4,1)
+      }
+    }
   }
 }
 
-// menampilkan heatmap kalau ada data yang sudah berubah 
-function viewUpdateHeatmap() { 
-    if (received_count > 0) {
-        heatmap.setData(heatmap_data);
-        received_count=0;
-        console.log('Heatmap repainted');
+function check(x,y, type){
+  if (type == 1){
+    var val = true
+  }
+  else{
+    var val = false
+  }
+  if (x == 0){
+    for(let i=1; i<5; i++){
+      document.getElementById("x"+i.toString()+"y"+y.toString()).checked = val;
     }
+  } else{
+    for(let i=1; i<5; i++){
+      document.getElementById("x"+x.toString()+"y"+i.toString()).checked = val;
+    }
+  }
 }
-
-viewHeatmap();
-
-/// SLIDER R
-var sliderR = document.getElementById("sliderR");
-var sliderValR = document.getElementById("sliderValR");
-sliderValR.innerHTML = sliderR.value; // Display the default slider value
-
-// Update the current slider value (each time you drag the slider handle)
-sliderR.oninput = function() {
-  sliderValR.innerHTML = this.value;
-  R = this.value;
-  console.log(this.value);
-};
-
-/// SLIDER G
-var sliderG = document.getElementById("sliderG");
-var sliderValG = document.getElementById("sliderValG");
-sliderValR.innerHTML = sliderR.value; // Display the default slider value
-
-// Update the current slider value (each time you drag the slider handle)
-sliderG.oninput = function() {
-  sliderValG.innerHTML = this.value;
-  G = this.value;
-  console.log(this.value);
-};
-
-/// SLIDER B
-var sliderB = document.getElementById("sliderB");
-var sliderValB = document.getElementById("sliderValB");
-sliderValB.innerHTML = sliderB.value; // Display the default slider value
-
-// Update the current slider value (each time you drag the slider handle)
-sliderB.oninput = function() {
-  sliderValB.innerHTML = this.value;
-  B = this.value;
-  console.log(this.value);
-};
-
-/// SLIDER CC
-var sliderCC = document.getElementById("sliderCC");
-var sliderValCC = document.getElementById("sliderValCC");
-sliderValCC.innerHTML = sliderCC.value; // Display the default slider value
-
-// Update the current slider value (each time you drag the slider handle)
-sliderCC.oninput = function() {
-  sliderValCC.innerHTML = this.value;
-  CC = this.value;
-  console.log(this.value);
-};
