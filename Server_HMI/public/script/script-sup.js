@@ -101,6 +101,18 @@ client.on('message', function(topic, message) {
     if (tag == active_tag) {
       viewUpdateChart(value);
     }
+    if (fields[1]==active_node && fields[2]=="YI"){
+      if(document.getElementById("indicatorMode").className=="manual"){
+        if(value==1){
+          document.getElementById("indicatorMode").className="loader loader7";
+        }
+      }
+      else if(document.getElementById("indicatorMode").className=="loader loader7"){
+        if(value==0){
+          document.getElementById("indicatorMode").className="manual";
+        }  
+      }
+    }
 })
 
 
@@ -261,7 +273,7 @@ sliderR.oninput = function() {
 /// SLIDER G
 var sliderG = document.getElementById("sliderG");
 var sliderValG = document.getElementById("sliderValG");
-sliderValR.innerHTML = sliderR.value; // Display the default slider value
+sliderValG.innerHTML = sliderG.value; // Display the default slider value
 
 // Update the current slider value (each time you drag the slider handle)
 sliderG.oninput = function() {
@@ -314,6 +326,16 @@ function reset() {
   document.getElementById("checkboxAuto").checked = false;
 }
 
+function preProcessID(id){
+  if(id<10){
+    return ("0"+id.toString());
+  }
+  else{
+    return (id.toString());
+    console.log(id.toString())
+  }
+}
+
 function publish() {
   var autoManual;
   if (document.getElementById("checkboxAuto").checked == true) {
@@ -322,7 +344,7 @@ function publish() {
     autoManual = 0;
   }
   client.publish(
-    SYS_TOPIC + "NODE01/CC/011",
+    SYS_TOPIC + active_node +"/CC/"+preProcessID(active_node_id)+"1",
     document.getElementById("sliderCC").value.toString(),
     { retain: true }
   );
@@ -336,7 +358,7 @@ function publish() {
   );
   client.publish(
     SYS_TOPIC + "NODE01/DVG/011",
-    (document.getElementById("sliderG"), value).toString(),
+    document.getElementById("sliderG").value.toString(),
     { retain: true }
   );
   client.publish(
@@ -344,11 +366,4 @@ function publish() {
     document.getElementById("sliderB").value.toString(),
     { retain: true }
   );
-
-  // For monitoring
-  // console.log(document.getElementById("sliderCC").value.toString());
-  // console.log(autoManual.toString())
-  // console.log(document.getElementById("sliderR").value.toString())
-  // console.log(document.getElementById("sliderG").value.toString())
-  // console.log(document.getElementById("sliderB").value.toString())
 }
