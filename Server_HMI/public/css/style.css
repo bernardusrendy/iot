@@ -477,3 +477,9 @@ input[type="radio"]:checked + label:after {
 .bordered{
   border:1px solid rgba(86,61,124,.2);
 }
+
+/* Custom Check */
+.customCheck{
+  width: 40px;
+  height: 40px;
+}
