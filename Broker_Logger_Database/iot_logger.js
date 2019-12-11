@@ -5,12 +5,12 @@ Provides TIMESTAMP service
 ------------------------*/
 
 //---- Configuratior
-const BROKER_ADDR = '192.168.43.175'
+const BROKER_ADDR = '192.168.43.215'
 const SYS_TOPIC = 'TF-IIOT/'
 const SYSTIME_TOPIC = 'TIMESTAMP'
 const DB_CONFIG = {
   //host: "192.168.1.100",
-  host: "192.168.43.175",
+  host: "192.168.43.215",
   user: "iiot",
   password: "industri40",
   database: "iiot03"
