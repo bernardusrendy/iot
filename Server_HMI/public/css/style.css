@@ -1,10 +1,12 @@
 /* CSS IIOT */
-
 /* LAYOUT UTAMA */
 body {
     background-color: #2c3e50;
+    background-image: url(Earth_Night.jpg);
     font-family: Roboto;
     margin: 0;
+    background-repeat: repeat;
+    background-attachment: fixed;
 }
 
 #footer {
@@ -16,16 +18,15 @@ body {
 } */
 
 .header {
-    background-color: white;
+    background-color: darkgrey;
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding: 5px;
     width: 100%;
-    text-align: left;
 }
 
 .header li {
-    color: #34495e;
+    color: white;
     font-size: 24;
     font-weight: bold;
     display: inline-block;
@@ -85,13 +86,14 @@ body {
     margin: auto;
     text-align: center;
     overflow: auto;
+    padding: 2px;
+    border-radius: 10px;
 }
 
 .sensors {
-    border-style: solid;
-    border-width:3px;
-    border-color:powderblue;
-    padding: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    padding: 2px;
     width: 150px;
     height: 100px;
     margin: auto;
@@ -104,22 +106,25 @@ body {
     color: Black;
     display: table-cell;
     vertical-align: middle;
-    font-family: 'Roboto';
+    font-family: sans-serif;
     font-size: 15pt;
     width: 150px;
-    padding: 10px 0;
-    background-color: powderblue;
+    padding: 10px;
     margin: 0;
 }
 
 .sensors_value {
     font-size: 20pt;
     display: table-cell;
-    font-family: 'Roboto';
+    font-family: sans-serif;
     display: inline-block;
-    /* margin-top: 5px; */
+    padding: 2px;
+    background-color: white;
     text-align: center;
     vertical-align: middle;
+    width: 90%;
+    padding: 2px;
+    border-radius: 10px;
 }
 
 .sensors_number {
@@ -308,7 +313,7 @@ body {
   box-sizing: border-box;
   background: url(./finished.png) no-repeat;
   width: 100px; /* Width of new image */
-  height: 100px; /* Height of new image */  
+  height: 100px; /* Height of new image */
 }
 /* TOGGLE SWITCH */
 

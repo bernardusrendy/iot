@@ -14,48 +14,47 @@
  <body>
 
     <ul class="header">
-        <li><img src="img/Logo_ITB.png" id="logo_itb"/></li>
-        <li>TF4061 - Industrial Internet of Things</li>
+        <li>   IIOT LIGHT MONITORING & CONTROL</li>
     </ul>
 
     <!-- menu keluar sesuai otentifikasi -->
     <div id=menu></div>
     <script src="script/auth-menu.js"></script>
     <script>auth_page('supervise','menu')</script>
-    
+
     <div class="container mt-3 mb-2">
         <div id="controlContainer" class="container mt-3 p-md-5">
             <div class="row align-items-center">
                 <div class="col-sm-6">
                     <h1 style="color:black;"> SENSOR BRIGHTNESS </h1>
-                    <div id="e-heatmap" class="ml-md-5"></div>                
+                    <div id="e-heatmap" class="ml-md-5"></div>
                 </div>
                 <div class="col-sm-6">
                     <h1 style="color:black;"> STATUS LED </h1>
-                    <div id="e-heatmap2" class="ml-md-5"></div>                
-                </div>        
+                    <div id="e-heatmap2" class="ml-md-5"></div>
+                </div>
             </div>
         </div>
     </div>
     <div class="container">
         <div id="controlContainer" class="container mt-3">
             <div class="row align-items-center">
-                <div class="radio ml-3"> 
-                    <input id="semua" type="radio" name="numbers" value="semua">  
-                    <label for="semua">Semua</label>  
-                    <input id="kirix" type="radio" name="numbers" value="kirix">  
+                <div class="radio ml-3">
+                    <input id="semua" type="radio" name="numbers" value="semua">
+                    <label for="semua">Semua</label>
+                    <input id="kirix" type="radio" name="numbers" value="kirix">
                     <label for="kirix">Kiri(X-Axis)</label>
-                    <input id="tengahx" type="radio" name="numbers" value="tengahx">  
+                    <input id="tengahx" type="radio" name="numbers" value="tengahx">
                     <label for="tengahx">Tengah(X-Axis)</label>
-                    <input id="kananx" type="radio" name="numbers" value="kananx">  
+                    <input id="kananx" type="radio" name="numbers" value="kananx">
                     <label for="kananx">Kanan(X-Axis)</label>
-                    <input id="kiriy" type="radio" name="numbers" value="kiriy">  
+                    <input id="kiriy" type="radio" name="numbers" value="kiriy">
                     <label for="kiriy">Kiri(Y-Axis)</label>
-                    <input id="tengahy" type="radio" name="numbers" value="tengahy">  
+                    <input id="tengahy" type="radio" name="numbers" value="tengahy">
                     <label for="tengahy">Tengah(Y-Axis)</label>
-                    <input id="kanany" type="radio" name="numbers" value="kanany">  
-                    <label for="kanany">Kanan(Y-Ais)</label>              
-                </div>            
+                    <input id="kanany" type="radio" name="numbers" value="kanany">
+                    <label for="kanany">Kanan(Y-Ais)</label>
+                </div>
             </div>
             <div class="row align-items-center">
                 <div class="col-sm-7">
@@ -90,8 +89,8 @@
                   <div>
                       <div style="color: black; font-family: Roboto; font-size: 18px;">Red</div>
                       <input type="range" min="0" max="255" value="50" class="sliderRGB R" id="sliderR"/>
-                      <span id="sliderValR" style="color: black; font-family: Roboto; font-size: 18px;"></span> <!--Show the value of the slider--> 
-                  </div>   
+                      <span id="sliderValR" style="color: black; font-family: Roboto; font-size: 18px;"></span> <!--Show the value of the slider-->
+                  </div>
                   <div>
                     <div style="color: black; font-family: Roboto; font-size: 18px;">Green</div>
                     <input type="range" min="0" max="255" value="50" class="sliderRGB G" id="sliderG"/>
