@@ -165,7 +165,7 @@ var config = {
         display: true,
         scaleLabel: {
           display: true,
-          labelString: 'Temperature'
+          labelString: 'Brightness (lx)'
         }
       }]
     }
