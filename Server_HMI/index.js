@@ -2,7 +2,7 @@
 const HTTP_PORT = 8080;
 const DBCONFIG = {
   //host: "192.168.1.100",
-  host: "localhost",
+  host: "192.168.1.101",
   user: "iiot",
   password: "industri40",
   database: "iiot03"

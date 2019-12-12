@@ -1,8 +1,9 @@
 /////***** CONFIGURATION & SETUP *****/////
-const BROKER_ADDR = "192.168.8.101";
+const BROKER_ADDR = "192.168.1.100";
 const BROKER_PORT = "3000";
 // Topic with wildcard
-const SYS_TOPIC = "TF-IIOT/#";
+const SYS_TOPIC = "TF-IIOT/";
+const SYS_TOPIC2= "TF-IIOT/#"
 const TAG_TOPIC = 'CT';
 // MQTT Setup
 var broker_url = "ws://" + BROKER_ADDR + ":" + BROKER_PORT;
@@ -35,19 +36,19 @@ var nodestate = [];
 for (let i = 0; i < 16; i++) {
   nodestate.push("0");
 }
-console.log(nodestate);
+//console.log(nodestate);
 
 // SLIDER RGB
 for (let i = 0; i < 3; i++) {
   slider[i] = document.getElementById("slider" + RGB[i]);
   sliderVal[i] = document.getElementById("sliderVal" + RGB[i]); // Ambil Value
   sliderVal[i].innerHTML = slider[i].value; // Display the default slider value
-  // console.log(slider[i].value)
+  // //console.log(slider[i].value)
 
   //Update the current slider value (each time you drag the slider handle)
   slider[i].oninput = function() {
     sliderVal[i].innerHTML = this.value;
-    console.log(slider[i].value);
+    //console.log(slider[i].value);
   };
 }
 
@@ -59,7 +60,7 @@ sliderVal[3].innerHTML = slider[3].value; // Display the default slider value
 //Update the current slider value (each time you drag the slider handle)
 slider[3].oninput = function() {
   sliderVal[3].innerHTML = this.value;
-  // console.log(slider[3].value);
+  // //console.log(slider[3].value);
 };
 
 //**** HEATMAP ****//
@@ -101,7 +102,7 @@ async function onReceiveCT(node, value) {
     if (point != null) {
         point.value = value;
         received_count +=1;
-        //console.log("Update "+node+"="+JSON.stringify(point));
+        ////console.log("Update "+node+"="+JSON.stringify(point));
     }
 }
 
@@ -121,7 +122,7 @@ async function viewHeatmap() {
         mapCT.set(node.NODE,point);
     }
     heatmap.setData(heatmap_data);
-    console.log('heatmap_data = '+JSON.stringify(heatmap_data));
+    //console.log('heatmap_data = '+JSON.stringify(heatmap_data));
     return true;
   }
   else {
@@ -136,16 +137,16 @@ function viewUpdateHeatmap() {
     if (received_count > 0) {
         heatmap.setData(heatmap_data);
         received_count=0;
-        console.log('Heatmap repainted');
+        //console.log('Heatmap repainted');
     }
 }
 
 async function getNodes() {
   url = '/api/nodes';
-  //console.log('Get :', url);
+  ////console.log('Get :', url);
   response = await fetch(url);
   rjson = await response.json();
-  //console.log(JSON.stringify(rjson));
+  ////console.log(JSON.stringify(rjson));
   return rjson;
 }
 
@@ -154,35 +155,35 @@ viewHeatmap();
 /////***** MQTT *****/////
 // Run when connected (continuous)
 client.on("connect", function() {
-  console.log("client connected at %s:%s", BROKER_ADDR);
-  console.log('MQTT client connected to '+broker_url);
+  //console.log("client connected at %s:%s", BROKER_ADDR);
+  //console.log('MQTT client connected to '+broker_url);
   // siap terima semua data CT
   topic = SYS_TOPIC+'+/'+TAG_TOPIC+'/#';
   client.subscribe(topic);
-  console.log("Subscribe for "+topic);
+  //console.log("Subscribe for "+topic);
   timer = setInterval(viewUpdateHeatmap, UPDATE_INTERVAL);
-  client.subscribe(SYS_TOPIC);
+  client.subscribe(SYS_TOPIC2);
 });
 
 client.on('message', function(topic, message) {   
   // decode topic
   // SYS/NODE/TAG/NUM
-  //console.log('Received %s = %d', node, value);
-  // console.log("MQTT RECEIVED", topic + " : " + message.toString());
+  ////console.log('Received %s = %d', node, value);
+  // //console.log("MQTT RECEIVED", topic + " : " + message.toString());
 
   // decode the topic
   var fields = topic.split("/");
-  // console.log("FIELDS", fields);
+  // //console.log("FIELDS", fields);
   node = fields[1];
   // value = parseInt(message.toString('utf-8'),10);
   sNode = fields[1]; // snode = NODE01 atau NODE02 dsb
   sNode = sNode.slice(4,6)
   sNode = parseInt(sNode) // snode = 1, 2 ,3 ... dsb
 
-  console.log(sNode)
+  //console.log(sNode)
   sTag = fields[2]; // sTAG = CT011 dsb
   value = parseInt(message, 10); // isi dari topicnya
-  // console.log("VALUE", value)
+  // //console.log("VALUE", value)
   saveData(sNode, sTag, value);
   if (sTag=="CT"){
     onReceiveCT(node, value);    
@@ -203,17 +204,19 @@ function publish() {
     stateAuto = 0;
   }
 
-  console.log("State Auto", stateAuto);
+  // console.log("State Auto", stateAuto);
 
   //  Konversi posisi ke node
   var z = 1;
-  for(let i = 1; i<5; i++){
-    for(let u = 1; u<5; u++){
+  for (let i = 1; i < 5; i++) {
+    for (let u = 1; u < 5; u++) {
       // Check checkbox state and save it in the array
-      node[z] = document.getElementById("x" + u.toString() + "y" + i.toString()).checked;
+      node[z] = document.getElementById(
+        "x" + u.toString() + "y" + i.toString()
+      ).checked;
       // position[i][u] = document.getElementById("x" + i.toString() + "y" + u.toString()).checked;
       // node[z] = position[i][u]
-      z++
+      z++;
     }
   }
 
@@ -223,46 +226,46 @@ function publish() {
 
     // Publish when checkbox is ticked
     if (node[i] == true) {
-      console.log("node", i, "PUBLISHED");
+      // console.log("node", i, "PUBLISHED");
 
-      console.log("HERE", typeof i)
+      // console.log("HERE", typeof i);
       // Publish RGB topic
       for (let u = 0; u < 3; u++) {
-        if (i<10){
-          topicPublish = SYS_TOPIC + "NODE" + "0" + i + "/DV" + RGB[u] + "/0"+ i +"1";
-        } else{
-          topicPublish = SYS_TOPIC + "NODE" + i + "/DV" + RGB[u] + "/"+ i + "1";
+        if (i < 10) {
+          topicPublish = SYS_TOPIC + "NODE" + "0" + i + "/DV" + RGB[u] + "/011";
+        } else {
+          topicPublish = SYS_TOPIC + "NODE" + i + "/DV" + RGB[u] + "/011";
         }
-        console.log(topicPublish, slider[u].value.toString());
+        // console.log(topicPublish, slider[u].value.toString());
         client.publish(topicPublish, slider[u].value.toString());
       }
 
       // Publish CC topic
-      if (i<10){
-        topicPublish = SYS_TOPIC + "NODE" + "0" + i + "/CC" + "/0"+ i +"1";
-      } else{
-        topicPublish = SYS_TOPIC + "NODE" + i + "/CC" + "/"+ i + "1";
+      if (i < 10) {
+        topicPublish = SYS_TOPIC + "NODE" + "0" + i + "/CC/011";
+      } else {
+        topicPublish = SYS_TOPIC + "NODE" + i + "/CC/011";
       }
 
       client.publish(topicPublish, slider[3].value.toString());
-      console.log(topicPublish, slider[3].value.toString());
+      // console.log(topicPublish, slider[3].value.toString());
 
       // Publish State Auto
-      if (i<10){
-        topicPublish = SYS_TOPIC + "NODE" + "0" + i + "/YS" + "/0"+ i +"1";
-      } else{
-        topicPublish = SYS_TOPIC + "NODE" + i + "/YS" + "/"+ i + "1";
+      if (i < 10) {
+        topicPublish = SYS_TOPIC + "NODE" + "0" + i + "/YS/011";
+      } else {
+        topicPublish = SYS_TOPIC + "NODE" + i + "/YS/011";
       }
 
       client.publish(topicPublish, stateAuto.toString());
-      console.log(topicPublish, stateAuto.toString());
+      // console.log(topicPublish, stateAuto.toString());
     }
   }
   console.log(node);
 }
 
 function saveData(sNode, sTag, value) {
-  // console.log(sTag);
+  // //console.log(sTag);
   //  Simpen data biar gampang ceritanya sih
   switch (sTag) {
     case "CT":
@@ -273,23 +276,23 @@ function saveData(sNode, sTag, value) {
       break;
     case "DIR":
       R[sNode] = value;
-      // console.log(R[sNode], G[sNode], B[sNode])
+      // //console.log(R[sNode], G[sNode], B[sNode])
       break;
     case "DIG":
       G[sNode] = value;
-      // console.log(R[sNode], G[sNode], B[sNode])
+      // //console.log(R[sNode], G[sNode], B[sNode])
       break;
     case "DIB":
       B[sNode] = value;
-      // console.log(R[sNode], G[sNode], B[sNode])
+      // //console.log(R[sNode], G[sNode], B[sNode])
       break;
   }
   // Update array warna
-  // console.log(R[sNode] != undefined && G[sNode] != undefined && B[sNode] != undefined)
+  // //console.log(R[sNode] != undefined && G[sNode] != undefined && B[sNode] != undefined)
   if(R[sNode] != undefined && G[sNode] != undefined && B[sNode] != undefined){
     color[sNode] = rgbToHex(R[sNode], G[sNode], B[sNode]); 
     // updateHMI()
-    // console.log("NIC", color)
+    // //console.log("NIC", color)
   }
 }
 
@@ -298,18 +301,18 @@ function updateHMI() {
   // Konversi Node menjadi posisi dan looping tiap posisi
   for (let i = 1; i < 5; i++) {
     for (let u = 1; u < 5; u++) {
-      // console.log("map_x" + i.toString() + "y" + u.toString())
-      // console.log(document.getElementById("map_x" + i.toString() + "y" + u.toString()).style.backgroundColor)
-      // console.log(color[z])
+      // //console.log("map_x" + i.toString() + "y" + u.toString())
+      // //console.log(document.getElementById("map_x" + i.toString() + "y" + u.toString()).style.backgroundColor)
+      // //console.log(color[z])
       document.getElementById("map_x" + u + "y" + i).style.backgroundColor = color[z];
       z++;
-      // console.log("UPDATED")
+      // //console.log("UPDATED")
     }
   }
 }
 
 // function changeColor(node) {
-//   console.log(
+//   //console.log(
 //     document.getElementById("node" + node.toString()).style.backgroundColor
 //   );
 //   document.getElementById("node" + node.toString()).style.backgroundColor =
@@ -393,7 +396,7 @@ function reset() {
   check(0, 4, 0);
   // radio button
   for (let i = 0; i < 7; i++) {
-    console.log(document.getElementById(radio[i]).checked);
+    //console.log(document.getElementById(radio[i]).checked);
     // if(document.getElementById(radio[i]).checked == true){
     document.getElementById(radio[i]).checked = false;
     // }
@@ -404,13 +407,13 @@ function reset() {
     document.getElementById("slider" + RGB[i]).value = 50;
     document.getElementById("sliderVal" + RGB[i]).innerHTML = 50; // Ambil Value
     // sliderVal[i].innerHTML = slider[i].value; // Display the default slider value
-    // console.log(slider[i].value)
+    // //console.log(slider[i].value)
   }
   // // SLIDER CC
   document.getElementById("sliderCC").value = 50;
   sliderVal[3] = document.getElementById("sliderValCC").innerHTML = 50; // Ambil Value
   // sliderVal[3].innerHTML = slider[3].value; // Display the default slider value
-  // console.log(slider[3].value)
+  // //console.log(slider[3].value)
 
   // state Auto
   document.getElementById("checkboxAuto").checked = false;

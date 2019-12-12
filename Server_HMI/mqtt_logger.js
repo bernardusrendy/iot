@@ -4,7 +4,7 @@ mqtt2sql.js: MQTT Subscriber who inputs message to SQL Database
 
 //---- MQTT subscriber
 var mqtt = require('mqtt')
-const brokerAddress = 'localhost'
+const brokerAddress = '192.168.1.100'
 const SYS = 'TF-IIOT/'
 
 var mqtt2sql = mqtt.connect('mqtt://'+ brokerAddress)

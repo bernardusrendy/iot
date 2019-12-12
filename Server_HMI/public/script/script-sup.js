@@ -1,4 +1,4 @@
-const BROKER_ADDR = '127.0.0.1';
+const BROKER_ADDR = '192.168.1.100';
 const BROKER_PORT = '3000';
 
 const SYS_TOPIC = 'TF-IIOT/';
@@ -344,25 +344,27 @@ function publish() {
     autoManual = 0;
   }
   client.publish(
-    SYS_TOPIC + active_node +"/CC/"+preProcessID(active_node_id)+"1",
+    SYS_TOPIC + active_node +"/CC/"+ preProcessID(active_node_id) + "1",
     document.getElementById("sliderCC").value.toString(),
     { retain: true }
   );
-  client.publish(SYS_TOPIC + "NODE01/YS/011", autoManual.toString(), {
+  client.publish(
+    SYS_TOPIC + active_node +"/YS/"+ preProcessID(active_node_id) + "1", 
+    autoManual.toString(), {
     retain: true
   });
   client.publish(
-    SYS_TOPIC + "NODE01/DVR/011",
+    SYS_TOPIC + active_node +"/DVR/"+ preProcessID(active_node_id) + "1",
     document.getElementById("sliderR").value.toString(),
     { retain: true }
   );
   client.publish(
-    SYS_TOPIC + "NODE01/DVG/011",
+    SYS_TOPIC + active_node +"/DVG/"+ preProcessID(active_node_id) + "1",
     document.getElementById("sliderG").value.toString(),
     { retain: true }
   );
   client.publish(
-    SYS_TOPIC + "NODE01/DVB/011",
+    SYS_TOPIC + active_node +"/DVB/"+ preProcessID(active_node_id) + "1",
     document.getElementById("sliderB").value.toString(),
     { retain: true }
   );
