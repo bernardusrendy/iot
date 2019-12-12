@@ -186,7 +186,7 @@ client.on('message', function(topic, message) {
   // //console.log("VALUE", value)
   saveData(sNode, sTag, value);
   if (sTag=="CT"){
-    onReceiveCT(node, value);    
+    // onReceiveCT(node, value);    
   }
   else{
     updateHMI();  
@@ -232,9 +232,9 @@ function publish() {
       // Publish RGB topic
       for (let u = 0; u < 3; u++) {
         if (i < 10) {
-          topicPublish = SYS_TOPIC + "NODE" + "0" + i + "/DV" + RGB[u] + "/011";
+          topicPublish = SYS_TOPIC + "NODE" + "0" + i + "/DV" + RGB[u] + "/0" + i + "1";
         } else {
-          topicPublish = SYS_TOPIC + "NODE" + i + "/DV" + RGB[u] + "/011";
+          topicPublish = SYS_TOPIC + "NODE" + i + "/DV" + RGB[u] + "/0"+ i + "1";
         }
         // console.log(topicPublish, slider[u].value.toString());
         client.publish(topicPublish, slider[u].value.toString());
@@ -242,9 +242,9 @@ function publish() {
 
       // Publish CC topic
       if (i < 10) {
-        topicPublish = SYS_TOPIC + "NODE" + "0" + i + "/CC/011";
+        topicPublish = SYS_TOPIC + "NODE" + "0" + i + "/CC" + "/0" + i + "1";
       } else {
-        topicPublish = SYS_TOPIC + "NODE" + i + "/CC/011";
+        topicPublish = SYS_TOPIC + "NODE" + i + "/CC" + "/0" + i + "1";
       }
 
       client.publish(topicPublish, slider[3].value.toString());
@@ -252,9 +252,9 @@ function publish() {
 
       // Publish State Auto
       if (i < 10) {
-        topicPublish = SYS_TOPIC + "NODE" + "0" + i + "/YS/011";
+        topicPublish = SYS_TOPIC + "NODE" + "0" + i + "/YS" + "/0" + i + "1";
       } else {
-        topicPublish = SYS_TOPIC + "NODE" + i + "/YS/011";
+        topicPublish = SYS_TOPIC + "NODE" + i + "/YS" + "/0" + i + "1";
       }
 
       client.publish(topicPublish, stateAuto.toString());
