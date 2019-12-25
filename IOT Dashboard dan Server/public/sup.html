@@ -1,0 +1,102 @@
+<html>
+ <head>
+    <title>TF4016 - Industrial Internet of Things</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="script/jquery-3.4.1.min.js"></script>
+    <script src="script/bootstrap.min.js"></script>
+    <script src="script/mqtt.js"></script>
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> -->
+ </head>
+ <body>
+     <div id="header">
+       <ul class="header">
+        <li>IIOT LIGHT MONITORING & CONTROL</li>
+      </ul>
+
+      <!-- menu keluar sesuai otentifikasi -->
+      <div id="menu"></div>
+      <script src="script/auth-menu.js"></script>
+      <script>auth_page('supervise','menu')</script>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <!-- Chart Pembacaan Sensor -->
+        <div id="col-left" class="col-sm-7">
+            <div class="graph">
+                <canvas id="e-chart" width="100%"></canvas>
+            </div>
+            <!-- Container Control RGB dan Indicator Manual Auto -->
+            <div id="controlContainer" class="container mt-3">
+              <div class="row align-items-center">
+                <div class="col-sm-9">
+                  <div>
+                      <div style="color: black; font-family: Roboto; font-size: 18px;">Red</div>
+                      <input type="range" min="0" max="255" value="50" class="sliderRGB R" id="sliderR"/>
+                      <span id="sliderValR" style="color: black; font-family: Roboto; font-size: 18px;"></span> <!--Show the value of the slider-->
+                  </div>
+                  <div>
+                    <div style="color: black; font-family: Roboto; font-size: 18px;">Green</div>
+                    <input type="range" min="0" max="255" value="50" class="sliderRGB G" id="sliderG"/>
+                    <span id="sliderValG" style="color: black; font-family: Roboto; font-size: 18px;"></span> <!--Show the value of the slider-->
+                  </div>
+                  <div>
+                    <div style="color: black; font-family: Roboto; font-size: 18px;">Blue</div>
+                    <input type="range" min="0" max="255" value="50" class="sliderRGB B" id="sliderB"/>
+                    <span id="sliderValB" style="color: black; font-family: Roboto; font-size: 18px;"></span> <!--Show the value of the slider-->
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <!-- Indicator Manual/Auto tergantung YI, set class ke "loader loader7" untuk auto dan "manual" untuk manual -->
+                  <div id="indicatorMode" class="manual"></div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- Column Penampilan Status Node -->
+        <div id="col-right" class="col-sm-4">
+            <div id="e-nodes"></div>
+            <div id="e-tags"></div>
+        </div>
+      </div>
+      <!-- Kontrol CC, Publish, Reset, dan Auto/Manual Toggle -->
+      <div class="row align-items-center">
+        <div class="col-sm-11">
+          <div id="controlContainer" class="container mb-3">
+            <div class="row align-items-center">
+              <div class="col-sm-8">
+                <div style="color: black; font-family: Roboto; font-size: 18px;">CC Threshold</div>
+                <input type="range" min="0" max="3000" value="50" class="sliderCC CC" id="sliderCC"/>
+                <span id="sliderValCC" style="color: black; font-family: Roboto; font-size: 18px;"></span> <!--Show the value of the slider-->
+                <span style="color: black; font-family: Roboto; font-size: 18px;"> Lux </span>
+              </div>
+              <div class="col-sm-4">
+                <button id="buttonPublish" class="button-three" onclick=publish()>Publish</button>
+                <button id="buttonReset" class="button-three" onclick=reset()>Reset</button>
+                <div>
+                  <label class="toggle mt-3 mb-3 ml-2">
+                      <span class="toggle-label">Manual</span>
+                      <input id="checkboxAuto" class= "toggle-checkbox" type="checkbox">
+                      <div class="toggle-switch"></div>
+                      <span class="toggle-label">Auto</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="footer" class="pl-2">
+      (c) Teknik Fisika ITB, 2019
+    </div>
+
+    <script type="text/javascript" src="script/Chart.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="script/utils.js" charset="utf-8"></script>
+    <script type="text/javascript" src="script/script-sup.js" charset="utf-8"></script>
+ </body>
+</html>
